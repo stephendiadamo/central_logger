@@ -7,7 +7,6 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='admin'
 ))
-app.config.from_envvar('CENTRAL_LOGGER_SETTINGS', silent=True)
 
 @app.route('/')
 def landing_page():
@@ -34,4 +33,4 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5050)
