@@ -8,9 +8,11 @@ app.config.update(dict(
     PASSWORD='admin'
 ))
 
+
 @app.route('/')
 def landing_page():
     return render_template('index.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -26,11 +28,13 @@ def login():
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash('Logged out')
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(port=5050)
