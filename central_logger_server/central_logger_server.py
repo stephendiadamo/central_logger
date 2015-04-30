@@ -29,7 +29,7 @@ def bad_request(error):
 @app.route('/logger/api/v1.0/get_logs', methods=['GET'])
 def get_logs():
     session = Session()
-    if not request.json or not 'filter' in request.json:
+    if not request.json or not 'filter' in request.json or request.json['filter'] is None:
         res = session.query(Log).all()
     else:
         res = session.query(Log).filter(Log.log_type == request.json['filter']).all()
