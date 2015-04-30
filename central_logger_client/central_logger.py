@@ -77,20 +77,6 @@ def add_log():
     return render_template('add_log.html', error=error)
 
 
-@app.route('/view_logs', methods=['GET'])
-def view_logs():
-    data_filter = None
-    if 'filter' in request.args:
-        data_filter = request.args['filter']
-
-    try:
-        result = requests.get(API_URI + 'get_logs', json={'filter': data_filter})
-        return render_template('view_logs.html', data=result.json())
-    except requests.ConnectionError:
-        flash('Unable to connect to central logger server.')
-    return render_template('view_logs.html')
-
-
 if __name__ == '__main__':
     app.secret_key = 'abcdefggggg'
     app.run(port=5050, debug=True)
