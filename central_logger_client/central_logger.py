@@ -9,11 +9,8 @@ app.config.update(dict(
     PASSWORD='admin'
 ))
 
-<<<<<<< HEAD
 API_URI = 'http://localhost:5000/logger/api/v1.0/'
 
-=======
->>>>>>> origin
 
 @app.route('/')
 def landing_page():
