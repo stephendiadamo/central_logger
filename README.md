@@ -1,5 +1,63 @@
 # Central Logger #
 
+## Setup Instructions ##
+* Clone project to a clean directory
+
+```
+git clone git@github.com:stephendiadamo/central_logger.git
+```
+
+### Server setup ###
+
+* Navigate to server directiory
+
+```
+cd central_logger/central_logger_server
+```
+
+* Create virtual python environment and install requirements
+
+```
+virtualenv venv-server;
+source venv-server/bin/activate;
+pip install requirements.txt;
+```
+
+* Run setup script (this only initializes a local database)
+
+```
+./setup
+```
+
+* Launch server (port 5000)
+
+```
+python central_logger_server.py
+```
+
+
+### Client setup ###
+
+* Navigate to client directiory
+
+```
+cd central_logger/central_logger_client
+```
+
+* Create virtual python environment and install requirements
+
+```
+virtualenv venv-client;
+source venv-client/bin/activate;
+pip install requirements.txt;
+```
+
+* Launch client (port 5050)
+
+```
+python central_logger_client.py
+```
+
 ## API ##
 
 ### Create a new log entry ###
