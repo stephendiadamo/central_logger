@@ -15,8 +15,8 @@ class Log(Base):
     event_type = Column(String(100))
     application = Column(String(100))
     occurred_at = Column(String(50))
-    description = Column(String(200), nullable=True)
-    log_message = Column(String(500), nullable=True)
+    description = Column(String(500), nullable=True)
+    log_message = Column(String(800), nullable=True)
 
     def __init__(self, log_type, event_type, application, occurred_at=None, description=None, log_message=None):
         if occurred_at is None:
