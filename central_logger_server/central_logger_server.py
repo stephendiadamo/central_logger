@@ -47,6 +47,8 @@ def create_log():
     event_type = request.json['event_type']
     application = request.json['application']
     occurred_at = request.json.get('occurred_at', None)
+    if occurred_at == '':
+        occurred_at = None
     description = request.json.get('description', None)
     log_message = request.json.get('log_message', None)
 

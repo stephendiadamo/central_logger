@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block body %}
+    <h2>Report Error</h2>
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <form action="{{ url_for('report_error') }}" method="post">
+        <label for="log_type">(*)Log Type:</label>
+        <select id="log_type" required>
+            <option value="error"> Error</option>
+            <option value="log"> Log</option>
+        </select>
+        <br>
+        <label for="event_type">(*)Event Type:</label>
+        <input id="event_type" type="text" name="event_type" required>
+        <br>
+        <label for="application">(*)Application:</label>
+        <select name="application" id="application" required>
+            <option value="error">Todoist</option>
+            <option value="log">Wedoist</option>
+            <option value="log">Support</option>
+            <option value="log">Votebox</option>
+            <option value="log">Other</option>
+        </select>
+        <br>
+        <label for="occurred_at">Date of occurrence (default now):</label>
+        <input id="occurred_at" type="text" name="occurred_at">
+        <br>
+        <label for="description">Description:</label>
+        <input id="description" type="text" name="description">
+        <br>
+        <label for="log_message">Error details:</label>
+        <input id="log_message" type="text" name="log_message">
+        <br>
+        <input type="submit" value="Send">
+    </form>
+{% endblock %}
