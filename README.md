@@ -44,7 +44,7 @@ python central_logger_server.py
 cd central_logger/central_logger_client
 ```
 
-* Create virtual python environment and install requirements
+* Create virtual python environment and install requirements (if in venv-server still, run 'deactivate' first)
 
 ```
 virtualenv venv-client;
