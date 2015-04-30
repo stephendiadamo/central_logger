@@ -80,5 +80,5 @@ def simulate_bulk_logging():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'abcdefggggg'
+    app.secret_key = 'AABBMmBBBRERERER8998822333444'
     app.run(port=5050, debug=False)
