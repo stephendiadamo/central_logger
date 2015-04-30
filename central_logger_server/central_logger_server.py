@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, request, abort
+from flask import Flask, jsonify, make_response, request, abort, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Log
@@ -18,16 +18,36 @@ REQUIRED_LOG_FIELDS = [
 
 @app.errorhandler(404)
 def not_found(error):
+    """
+    Handles 404 errors
+    """
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.errorhandler(400)
 def bad_request(error):
+    """
+    Handles 400 errors
+    """
     return make_response(jsonify({'error': 'Bad request'}), 400)
+
+
+@app.route('/view_data', methods=['GET'])
+def view_data():
+    """
+    Render a table to show all log entries
+    """
+    session = Session()
+    logs = session.query(Log).all()
+    return render_template('index.html', logs=logs)
 
 
 @app.route('/logger/api/v1.0/get_logs', methods=['GET'])
 def get_logs():
+    """
+    Return JSON formatted data of log entries. Optional filter parameter
+    is available to filter data by log_type.
+    """
     session = Session()
     if not request.json or not 'filter' in request.json or request.json['filter'] is None:
         res = session.query(Log).all()
@@ -39,6 +59,9 @@ def get_logs():
 
 @app.route('/logger/api/v1.0/logs', methods=['POST'])
 def create_log():
+    """
+    Add a new log entry.
+    """
     if not request.json or not has_required_event_data_fields(request.json):
         abort(400)
 
@@ -64,6 +87,11 @@ def time_data():
 
 
 def has_required_event_data_fields(json_request):
+    """
+    Used to validate new log entry
+    :param json_request: The provided JSON data of the new log
+    :return: If valid or not
+    """
     for field in REQUIRED_LOG_FIELDS:
         if not field in json_request:
             return False

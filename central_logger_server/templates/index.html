@@ -1,0 +1,45 @@
+<!doctype html>
+<head>
+    <title> Central Logger </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.tablesorter.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.filtertable.min.js') }}"></script>
+</head>
+
+<body>
+
+<div class="data-table">
+    <table>
+        <thead>
+        <tr>
+            <th>Application</th>
+            <th>Log Type</th>
+            <th>Event Type</th>
+            <th>Occurred At</th>
+            <th>Description</th>
+            <th>Log Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs %}
+            <tr>
+                <td>{{ log.application }}</td>
+                <td>{{ log.log_type }}</td>
+                <td>{{ log.event_type }}</td>
+                <td>{{ log.occurred_at }}</td>
+                <td>{{ log.description }}</td>
+                <td>{{ log.log_message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $("table").tablesorter();
+    $("table").filterTable({
+        quickList: ['todoist', 'wedoist']
+    });
+</script>
+</body>

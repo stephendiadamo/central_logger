@@ -1,0 +1,90 @@
+.data-table {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    border: 1px solid #000000;
+}
+
+.data-table table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background-color: #cccccc;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #999999;
+}
+
+.data-table td {
+    vertical-align: middle;
+
+    border: 1px solid #000000;
+    border-width: 0px 1px 1px 0px;
+    text-align: left;
+    padding: 10px;
+    font-size: 13px;
+    font-family: Arial;
+    font-weight: normal;
+    color: #000000;
+}
+
+.data-table tbody tr:last-child td {
+    border-width: 0px 1px 0px 0px;
+}
+
+.data-table tbody tr td:last-child {
+    border-width: 0px 0px 1px 0px;
+}
+
+.data-table tbody tr:last-child td:last-child {
+    border-width: 0px 0px 0px 0px;
+}
+
+.data-table th {
+    background: url(bg.gif);
+    background-color: #5d5d5d;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: auto;
+    border: 0px solid #000000;
+    text-align: center;
+    border-width: 0px 0px 1px 1px;
+    font-size: 15px;
+    font-family: Arial;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.data-table th:hover {
+    cursor: pointer;
+}
+
+.data-table tbody tr:first-child td:first-child {
+    border-width: 0px 1px 1px 0px;
+}
+
+.data-table tbody tr:first-child td:last-child {
+    border-width: 0px 0px 1px 1px;
+}
+
+.filter-table .quick {
+    margin-left: 0.5em;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.fitler-table .quick:hover {
+    text-decoration: underline;
+}
+
+td.alt {
+    background-color: #ffc;
+    background-color: rgba(133, 223, 255, 0.20);
+}
