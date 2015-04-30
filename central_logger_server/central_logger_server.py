@@ -139,4 +139,4 @@ def has_required_event_data_fields(json_request):
 if __name__ == '__main__':
     scheduler.add_job(add_and_clear_log_buffer, 'interval', seconds=15)
     scheduler.start()
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=False)
