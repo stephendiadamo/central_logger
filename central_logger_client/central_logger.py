@@ -77,6 +77,28 @@ def add_log():
     return render_template('add_log.html', error=error)
 
 
+@app.route('/simulate_bulk_logging', methods=['GET'])
+def simulate_bulk_logging():
+    """
+    Simulate heavy traffic to the server.
+    """
+    i = 0
+    successful_entries = 0
+    while i < 1000:
+        data = {
+            'log_type': 'sim_log',
+            'event_type': 'sim_event',
+            'application': 'sim'
+        }
+        try:
+            requests.post(API_URI + 'logs', json=data)
+            successful_entries += 1
+        except:
+            print 'Fail'
+        i += 1
+    print 'Successfully added %d' % successful_entries
+    return render_template('add_log.html')
+
 
 if __name__ == '__main__':
     app.secret_key = 'abcdefggggg'
