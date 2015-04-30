@@ -7,6 +7,7 @@
 /logger/api/v1.0/logs
 
 * For adding a new log entry
+* Note, new entries are added to a buffer and added to the database ever 15 seconds in bulk
 * Entry must include 
   * log_type: The type of log, either error or normal log message
   * event\_type: A specific type of event. Eg. user\_error, server\_error, new\_task, etc.
@@ -21,5 +22,5 @@
 /logger/api/v1.0/get_logs
 
 * For fetching log data
-* Will return JSON data of log entries 
+* Will return JSON data of all log entries 
 * Can filter by 'log_type' by sending an optional parameter 'filter'
