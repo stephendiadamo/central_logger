@@ -28,7 +28,7 @@ def login():
         else:
             session['logged_in'] = True
             flash('Logged in')
-            return redirect(url_for('report_error'))
+            return redirect(url_for('add_log'))
     return render_template('login.html', error=error)
 
 
@@ -38,8 +38,8 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/report_error', methods=['GET', 'POST'])
-def report_error():
+@app.route('/add_log', methods=['GET', 'POST'])
+def add_log():
     error = None
     if request.method == 'POST':
         if not 'log_type' in request.form:
@@ -66,8 +66,17 @@ def report_error():
                 flash('Failed to log error')
             else:
                 flash('Successfully logged error with id: ' + str(result.json()['result']['id']))
-                return redirect(url_for('report_error'))
-    return render_template('report_error.html', error=error)
+                return redirect(url_for('add_log'))
+    return render_template('add_log.html', error=error)
+
+
+@app.route('/view_logs', methods=['GET'])
+def view_logs():
+    data_filter = None
+    if 'filter' in request.args:
+        data_filter = request.args['filter']
+    result = requests.get(API_URI + 'get_logs', json={'filter': data_filter})
+    return render_template('view_logs.html', data=result.json())
 
 
 if __name__ == '__main__':
