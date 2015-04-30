@@ -9,7 +9,7 @@
     {% endfor %}
     <form action="{{ url_for('report_error') }}" method="post">
         <label for="log_type">(*)Log Type:</label>
-        <select id="log_type" required>
+        <select name="log_type" id="log_type" required>
             <option value="error"> Error</option>
             <option value="log"> Log</option>
         </select>
@@ -19,11 +19,11 @@
         <br>
         <label for="application">(*)Application:</label>
         <select name="application" id="application" required>
-            <option value="error">Todoist</option>
-            <option value="log">Wedoist</option>
-            <option value="log">Support</option>
-            <option value="log">Votebox</option>
-            <option value="log">Other</option>
+            <option value="todoist">Todoist</option>
+            <option value="wedoist">Wedoist</option>
+            <option value="support">Support</option>
+            <option value="votebox">Votebox</option>
+            <option value="other">Other</option>
         </select>
         <br>
         <label for="occurred_at">Date of occurrence (default now):</label>

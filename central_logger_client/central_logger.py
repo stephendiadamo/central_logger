@@ -1,5 +1,6 @@
-from flask import Flask, request, session, g, redirect, url_for, \
-    abort, render_template, flash
+from flask import Flask, request, session, redirect, url_for, \
+    render_template, flash
+import requests
 
 app = Flask(__name__)
 
@@ -7,6 +8,8 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='admin'
 ))
+
+API_URI = 'http://localhost:5000/logger/api/v1.0/'
 
 
 @app.route('/')
@@ -25,16 +28,48 @@ def login():
         else:
             session['logged_in'] = True
             flash('Logged in')
-            return redirect(url_for('index'))
+            return redirect(url_for('report_error'))
     return render_template('login.html', error=error)
 
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
-    flash('Logged out')
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
+
+
+@app.route('/report_error', methods=['GET', 'POST'])
+def report_error():
+    error = None
+    if request.method == 'POST':
+        if not 'log_type' in request.form:
+            error = 'Missing log type information'
+        elif request.form['event_type'] is None:
+            error = 'Missing event type information'
+        elif request.form['application'] is None:
+            error = 'Missing application information'
+        else:
+            data = {
+                'log_type': request.form['log_type'],
+                'event_type': request.form['event_type'],
+                'application': request.form['application']
+            }
+            if 'occurred_at' in request.form:
+                data['occurred_at'] = request.form['occurred_at']
+            if 'description' in request.form:
+                data['description'] = request.form['description']
+            if 'log_message' in request.form:
+                data['log_message'] = request.form['log_message']
+
+            result = requests.post(API_URI + 'logs', json=data)
+            if 'error' in result.json()['result']:
+                flash('Failed to log error')
+            else:
+                flash('Successfully logged error with id: ' + str(result.json()['result']['id']))
+                return redirect(url_for('report_error'))
+    return render_template('report_error.html', error=error)
 
 
 if __name__ == '__main__':
-    app.run(port=5050)
+    app.secret_key = 'abcdefggggg'
+    app.run(port=5050, debug=True)
