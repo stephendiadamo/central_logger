@@ -82,3 +82,13 @@ python central_logger_client.py
 * For fetching log data
 * Will return JSON data of all log entries 
 * Can filter by 'log_type' by sending an optional parameter 'filter'
+
+### Display data ###
+
+/view_data
+
+* Will render a table view that shows all errors 
+* Contains sorting and filtering functionality using jQuery (quite slow for large amounts of data)
+
+
+
