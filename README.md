@@ -20,7 +20,7 @@ cd central_logger/central_logger_server
 ```
 virtualenv venv-server;
 source venv-server/bin/activate;
-pip install requirements.txt;
+pip install -r requirements.txt;
 ```
 
 * Run setup script (this only initializes a local database)
@@ -49,7 +49,7 @@ cd central_logger/central_logger_client
 ```
 virtualenv venv-client;
 source venv-client/bin/activate;
-pip install requirements.txt;
+pip install -r requirements.txt;
 ```
 
 * Launch client (port 5050)
