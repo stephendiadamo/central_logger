@@ -61,12 +61,19 @@ def add_log():
             if 'log_message' in request.form:
                 data['log_message'] = request.form['log_message']
 
-            result = requests.post(API_URI + 'logs', json=data)
-            if 'error' in result.json()['result']:
-                flash('Failed to log error')
-            else:
-                flash('Successfully logged error with id: ' + str(result.json()['result']['id']))
-                return redirect(url_for('add_log'))
+            try:
+                result = requests.post(API_URI + 'logs', json=data)
+                if 'error' in result.json()['result']:
+                    flash('Failed to log error')
+                else:
+                    flash('Successfully logged error with id: ' + str(result.json()['result']['id']))
+            except requests.ConnectionError:
+                flash('Unable to connect to central logger server.')
+            except:
+                flash('Issues with request.')
+
+            return redirect(url_for('add_log'))
+
     return render_template('add_log.html', error=error)
 
 
@@ -75,8 +82,13 @@ def view_logs():
     data_filter = None
     if 'filter' in request.args:
         data_filter = request.args['filter']
-    result = requests.get(API_URI + 'get_logs', json={'filter': data_filter})
-    return render_template('view_logs.html', data=result.json())
+
+    try:
+        result = requests.get(API_URI + 'get_logs', json={'filter': data_filter})
+        return render_template('view_logs.html', data=result.json())
+    except requests.ConnectionError:
+        flash('Unable to connect to central logger server.')
+    return render_template('view_logs.html')
 
 
 if __name__ == '__main__':
