@@ -1,0 +1,4 @@
+./central_logger_server/.*
+./central_logger_server/venv/*
+./central_logger_client/venv/*
+

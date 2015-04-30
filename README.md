@@ -90,5 +90,17 @@ python central_logger_client.py
 * Will render a table view that shows all errors 
 * Contains sorting and filtering functionality using jQuery (quite slow for large amounts of data)
 
+## Further Ideas ##
 
+### Filtering and Grouping ###
+
+Within the current project, I have added some jQuery plug-ins that allow for filtering and grouping, but these are slow when there are many logs being displayed. Ideally we will not be viewing every data entry at once. We would like data that has already been aggregated on the server to reduce the amount of data to display. 
+
+I have also allowed users to fetch data based on the log type. This is minimal but it gives the idea of what can be done. Users can query the database for logs from particular dates, event types, and possibly match some regular expressions to find certain exceptions. There are many possibilities. 
+
+I would leave the querying and filtering to the database engine since these are highly developed features, but I would try to use a start and end date for most queries to get only the data that is important to the user and to minimize the amount of data that needs to be handled.
+
+### Removing old logs ###
+
+An easy way to do this would be that every log entry gets deleted after a set time, say thirty days, unless it is flagged as important. We could create a cron-job that runs daily to remove old logs.
 
