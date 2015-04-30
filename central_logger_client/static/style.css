@@ -1,0 +1,45 @@
+.add-log {
+    padding: 15px;
+    width: 600px;
+}
+
+.entry {
+    padding: 5px;
+}
+
+.entry label {
+    font-size: 18px;
+}
+
+.entry select {
+    margin-top: 10px;
+    border: 1px solid black;
+    background: transparent;
+    padding: 5px;
+    font-size: 14px;
+    height: 30px;
+    width: 150px;
+}
+
+.entry input[type="text"] {
+    padding: 8px;
+    border: solid 1px black;
+    transition: box-shadow 0.3s;
+    font-size: 14px;
+    width: 200px;
+}
+
+.large-input {
+    width: 400px;
+    height: 100px;
+    font-size: 14px;
+}
+
+input[type="submit"] {
+    padding: 8px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}

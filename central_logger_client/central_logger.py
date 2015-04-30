@@ -43,9 +43,9 @@ def add_log():
             try:
                 result = requests.post(API_URI + 'logs', json=data)
                 if 'error' in result.json()['result']:
-                    flash('Failed to log error')
+                    flash('Failed to log')
                 else:
-                    flash('Successfully logged error with id: ' + str(result.json()['result']['id']))
+                    flash('Successfully logged')
             except requests.ConnectionError:
                 flash('Unable to connect to central logger server.')
             except:
