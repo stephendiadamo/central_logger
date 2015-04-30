@@ -39,5 +39,10 @@
             <input type="submit" value="Send">
         </form>
     </div>
+    <div>
+        <form action="{{ url_for('simulate_bulk_logging') }}" method="get">
+            <input type="submit" value="Add 1000 Logs">
+        </form>
+    </div>
 {% endblock %}
 
